@@ -1,13 +1,60 @@
 <!DOCTYPE html>
-<html>
+<html lang="es">
 <head>
-	<meta charset="utf-8">
-	<title>
-		Examen unidad 3
-	</title>
+	<title>EXAMEN UNIDAD 3 JSON</title>
+    <link rel="stylesheet" type="text/css" href="estilos.css">
 </head>
-<body>
- <h1>Bienvenido a tu examen unidad 3 :D</h1>
- <h5>Se utilizara Json para realizarlo</h5>
+<body bgcolor="2471A3">
+
+<script type="text/javascript" language="javascript">
+
+    var http_request = false;
+
+    function makeRequest(url) {
+
+        http_request = false;
+
+        if (window.XMLHttpRequest) { // Mozilla, Safari,...
+            http_request = new XMLHttpRequest();
+            
+        } 
+
+        if (!http_request) {
+            alert('Falla :( No es posible crear una instancia XMLHTTP');
+            return false;
+        }
+        http_request.onreadystatechange = 
+        alertContents;
+        nombre=document.getElementById("nombre").value;
+        animal=document.getElementById("animal").value;
+        url="noel.php?nombre="+nombre+"&animal="+animal;
+        http_request.open('GET', url, true);
+        http_request.send();
+
+    }
+
+    function alertContents() {
+
+        if (http_request.readyState == 4) {
+            if (http_request.status == 200) {
+                alert(http_request.responseText);
+            } else {
+                alert('Hubo problemas con la petición.');
+            }
+        }
+
+    }
+</script>
+<span
+    style="cursor: pointer; text-decoration: underline"
+    onclick="makeRequest('test.html')">
+        Hacer una peticion para examen unidad 3
+</span>
+<section>
+	Nombre: <input type="text" id="nombre"> <br>
+	Matricula: <input type="text" id="animal"> <br>
+	<input type="button" name="boton" value="
+	Agregar" onclick="makeRequest('noel.php')"> 
+</section>
 </body>
 </html>
